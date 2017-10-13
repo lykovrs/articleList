@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import Comment from "./Comment";
 import toggleOpen from "../decorators/toggleOpen";
+import PropTypes from "prop-types";
 
 class ListComments extends Component {
+  static propTypes = {
+    show: PropTypes.bool,
+    toggleOpen: PropTypes.func,
+    comment: PropTypes.array
+  };
+
   render() {
     const { toggleOpen, show } = this.props;
     return (
