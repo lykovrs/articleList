@@ -43,8 +43,10 @@ class Article extends Component {
   }
 
   getComments() {
-    if (!this.props.article.comments) return null;
-    return <ListComments comments={this.props.article.comments} />;
+    const comments = this.props.article.comments
+      ? this.props.article.comments
+      : [];
+    return <ListComments comments={comments} />;
   }
 }
 
