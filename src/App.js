@@ -5,6 +5,7 @@ import ListArticles from "./components/ListArticles/index";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 import { articles } from "./fixtures";
+import DateRangeChanger from "./components/DateRangeChanger/index";
 
 class App extends Component {
   state = {
@@ -26,6 +27,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">Hello!</p>
+        <DateRangeChanger />
 
         <Select
           name="form-field-name"
