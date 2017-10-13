@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import Comment from "./Comment";
-import toggleOpen from "../decorators/toggleOpen";
+import Comment from "./../Comment/index";
+import toggleOpen from "./../../decorators/toggleOpen";
 import PropTypes from "prop-types";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import "./style.css";
 
 class ListComments extends Component {
   static propTypes = {
@@ -13,9 +15,15 @@ class ListComments extends Component {
   render() {
     const { toggleOpen, show } = this.props;
     return (
-      <div>
+      <div ref={this.getListCommentRef}>
         <button onClick={toggleOpen}>{show ? "hide" : "show"} comments</button>
-        {this.getComments()}
+        <ReactCSSTransitionGroup
+          transitionName="ListComments"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}
+        >
+          {this.getComments()}
+        </ReactCSSTransitionGroup>
       </div>
     );
   }
@@ -25,6 +33,10 @@ class ListComments extends Component {
     return this.props.comments.map(comment => {
       return <Comment comment={comment} key={comment.id} />;
     });
+  }
+
+  getListCommentRef(ref) {
+    console.log("--> list comments container ", ref);
   }
 }
 
