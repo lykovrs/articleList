@@ -1,3 +1,5 @@
 export const INCREMENT = "INCREMENT";
 export const DECRIMENT = "DECRIMENT";
-// export const DEFAULT_ARTICLES = "DEFAULT_ARTICLES";
+
+// ARTICLE
+export const DELETE_ARTICLE = "DELETE_ARTICLE";

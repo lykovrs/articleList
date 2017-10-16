@@ -3,6 +3,8 @@ import ListComments from "./../ListComments/index";
 import PropTypes from "prop-types";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import "./style.css";
+import { connect } from "react-redux";
+import { deleteArticle } from "../../AC";
 
 class Article extends Component {
   static propTypes = {
@@ -21,7 +23,9 @@ class Article extends Component {
     const { article, isOpen, toggleOpen } = this.props;
     return (
       <article>
-        <h2 onClick={toggleOpen}>{article.title}</h2>
+        <h2 onClick={toggleOpen}>
+          {article.title} <button onClick={this.handleRemove}>Delete</button>
+        </h2>
         <ReactCSSTransitionGroup
           transitionName="Article"
           transitionEnterTimeout={500}
@@ -48,6 +52,11 @@ class Article extends Component {
       : [];
     return <ListComments comments={comments} />;
   }
+
+  handleRemove = ev => {
+    ev.preventDefault();
+    this.props.deleteArticle(this.props.article.id);
+  };
 }
 
-export default Article;
+export default connect(null, { deleteArticle })(Article);

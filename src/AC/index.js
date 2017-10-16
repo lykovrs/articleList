@@ -1,4 +1,4 @@
-import { INCREMENT, DECRIMENT } from "../constants";
+import { INCREMENT, DECRIMENT, DELETE_ARTICLE } from "../constants";
 
 export function increment() {
   const action = {
@@ -16,10 +16,13 @@ export function decriment() {
   return action;
 }
 
-// export function defaultArticles() {
-//   const action = {
-//     type: DEFAULT_ARTICLES
-//   };
-//
-//   return action;
-// }
+export function deleteArticle(id) {
+  const action = {
+    type: DELETE_ARTICLE,
+    payload: {
+      id
+    }
+  };
+
+  return action;
+}
