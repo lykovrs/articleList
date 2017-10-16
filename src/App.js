@@ -4,8 +4,9 @@ import "./App.css";
 import ListArticles from "./components/ListArticles/index";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
-import { articles } from "./fixtures";
 import DateRangeChanger from "./components/DateRangeChanger/index";
+import Counter from "./components/Counter";
+import { connect } from "react-redux";
 
 class App extends Component {
   state = {
@@ -13,7 +14,7 @@ class App extends Component {
   };
 
   render() {
-    const options = articles.map(article => {
+    const options = this.props.articles.map(article => {
       return {
         label: article.title,
         value: article.id
@@ -29,13 +30,15 @@ class App extends Component {
         <p className="App-intro">Hello!</p>
         <DateRangeChanger />
 
+        <Counter />
+
         <Select
           name="form-field-name"
           value={this.state.selected}
           options={options}
           onChange={this.handleSelect}
         />
-        <ListArticles articles={articles} />
+        <ListArticles articles={this.props.articles} />
       </div>
     );
   }
@@ -45,4 +48,6 @@ class App extends Component {
   };
 }
 
-export default App;
+export default connect(state => {
+  return { articles: state.articles };
+}, {})(App);
