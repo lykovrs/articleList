@@ -1,26 +1,4 @@
-import {
-  INCREMENT,
-  DECRIMENT,
-  DELETE_ARTICLE,
-  SELECT_FILTER,
-  CHANGE_DATE_RANGE
-} from "../constants";
-
-export function increment() {
-  const action = {
-    type: INCREMENT
-  };
-
-  return action;
-}
-
-export function decriment() {
-  const action = {
-    type: DECRIMENT
-  };
-
-  return action;
-}
+import { DELETE_ARTICLE, SELECT_FILTER, CHANGE_DATE_RANGE } from "../constants";
 
 export function deleteArticle(id) {
   const action = {
@@ -38,6 +16,17 @@ export function selectArticles(selectedArticles) {
     type: SELECT_FILTER,
     payload: {
       selectedArticles
+    }
+  };
+
+  return action;
+}
+
+export function changeDateRangeArticles(range) {
+  const action = {
+    type: CHANGE_DATE_RANGE,
+    payload: {
+      range
     }
   };
 

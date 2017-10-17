@@ -10,7 +10,7 @@ class Article extends Component {
   static propTypes = {
     article: PropTypes.shape({
       id: PropTypes.string.isRequired,
-      date: PropTypes.string,
+      date: PropTypes.Date,
       title: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       comments: PropTypes.array

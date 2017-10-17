@@ -6,22 +6,19 @@ import { selectArticles } from "../../AC";
 
 class SelectFilter extends Component {
   state = {
-    selected: null
+    selected: null,
+    options: []
   };
 
   render() {
-    const options = this.props.articles.map(article => {
-      return {
-        label: article.title,
-        value: article.id
-      };
-    });
+    // const options =
 
     return (
       <Select
+        onClick={this.handleClick}
         name="form-field-name"
         value={this.state.selected}
-        options={options}
+        options={this.state.options}
         onChange={this.handleSelect}
         multi={true}
       />
@@ -31,6 +28,17 @@ class SelectFilter extends Component {
   handleSelect = value => {
     this.setState({ selected: value });
     this.props.selectArticles(value);
+  };
+
+  handleClick = ev => {
+    this.setState({
+      options: this.props.articles.map(article => {
+        return {
+          label: article.title,
+          value: article.id
+        };
+      })
+    });
   };
 }
 

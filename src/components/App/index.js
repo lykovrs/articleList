@@ -4,7 +4,6 @@ import "./style.css";
 import ListArticles from "../ListArticles";
 import SelectFilter from "../SelectFilter";
 import DateRangeChanger from "../DateRangeChanger";
-import Counter from "../Counter";
 import { connect } from "react-redux";
 
 class App extends Component {
@@ -17,8 +16,6 @@ class App extends Component {
         </header>
         <p className="App-intro">Hello!</p>
         <DateRangeChanger />
-
-        <Counter />
 
         <SelectFilter />
 

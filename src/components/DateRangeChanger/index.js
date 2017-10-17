@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import DayPicker, { DateUtils } from "react-day-picker";
 import "react-day-picker/lib/style.css";
 import moment from "moment";
+import { connect } from "react-redux";
+import { changeDateRangeArticles } from "../../AC";
 
 class DateRangeChanger extends Component {
   state = {
@@ -11,13 +13,16 @@ class DateRangeChanger extends Component {
   handleDayClick = day => {
     const range = DateUtils.addDayToRange(day, this.state);
     this.setState(range);
+    this.props.changeDateRangeArticles(range);
   };
   handleResetClick = e => {
     e.preventDefault();
-    this.setState({
+    let resetRange = {
       from: null,
       to: null
-    });
+    };
+    this.setState(resetRange);
+    this.props.changeDateRangeArticles(resetRange);
   };
   render() {
     const { from, to } = this.state;
@@ -57,4 +62,4 @@ class DateRangeChanger extends Component {
   }
 }
 
-export default DateRangeChanger;
+export default connect(null, { changeDateRangeArticles })(DateRangeChanger);
