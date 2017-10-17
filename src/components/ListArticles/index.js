@@ -18,6 +18,7 @@ class ListArticles extends Component {
           key={article.id}
           isOpen={this.props.isOpen(article.id)}
           toggleOpen={this.props.openItem(article.id)}
+          hidden={article.hidden}
         />
       );
     });

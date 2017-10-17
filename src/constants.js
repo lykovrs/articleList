@@ -3,3 +3,7 @@ export const DECRIMENT = "DECRIMENT";
 
 // ARTICLE
 export const DELETE_ARTICLE = "DELETE_ARTICLE";
+
+// FILTERS
+export const SELECT_FILTER = "SELECT_FILTER";
+export const CHANGE_DATE_RANGE = "CHANGE_DATE_RANGE";
