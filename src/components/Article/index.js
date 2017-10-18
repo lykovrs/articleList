@@ -16,13 +16,12 @@ class Article extends Component {
       comments: PropTypes.array
     }),
     isOpen: PropTypes.func,
-    toggleOpen: PropTypes.func,
-    hidden: PropTypes.bool
+    toggleOpen: PropTypes.func
   };
 
   render() {
-    const { article, isOpen, toggleOpen, hidden } = this.props;
-    if (hidden) return null;
+    const { article, isOpen, toggleOpen } = this.props;
+
     return (
       <article>
         <h2 onClick={toggleOpen}>

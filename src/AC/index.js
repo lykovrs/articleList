@@ -1,5 +1,10 @@
-import { DELETE_ARTICLE, SELECT_FILTER, CHANGE_DATE_RANGE } from "../constants";
+import {
+  DELETE_ARTICLE,
+  CHANGE_SELECTION,
+  CHANGE_DATE_RANGE
+} from "../constants";
 
+// Article
 export function deleteArticle(id) {
   const action = {
     type: DELETE_ARTICLE,
@@ -11,22 +16,22 @@ export function deleteArticle(id) {
   return action;
 }
 
-export function selectArticles(selectedArticles) {
+export function selectArticles(selected) {
   const action = {
-    type: SELECT_FILTER,
+    type: CHANGE_SELECTION,
     payload: {
-      selectedArticles
+      selected
     }
   };
 
   return action;
 }
 
-export function changeDateRangeArticles(range) {
+export function changeDateRange(dateRange) {
   const action = {
     type: CHANGE_DATE_RANGE,
     payload: {
-      range
+      dateRange
     }
   };
 

@@ -4,7 +4,6 @@ import "./style.css";
 import ListArticles from "../ListArticles";
 import SelectFilter from "../SelectFilter";
 import DateRangeChanger from "../DateRangeChanger";
-import { connect } from "react-redux";
 
 class App extends Component {
   render() {
@@ -19,12 +18,10 @@ class App extends Component {
 
         <SelectFilter />
 
-        <ListArticles articles={this.props.articles} />
+        <ListArticles />
       </div>
     );
   }
 }
 
-export default connect(state => {
-  return { articles: state.articles };
-}, {})(App);
+export default App;

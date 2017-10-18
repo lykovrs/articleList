@@ -5,20 +5,14 @@ import { connect } from "react-redux";
 import { selectArticles } from "../../AC";
 
 class SelectFilter extends Component {
-  state = {
-    selected: null,
-    options: []
-  };
-
   render() {
-    // const options =
-
     return (
       <Select
-        onClick={this.handleClick}
         name="form-field-name"
-        value={this.state.selected}
-        options={this.state.options}
+        value={this.props.selected}
+        options={this.props.articles.map(article => {
+          return { label: article.title, value: article.id };
+        })}
         onChange={this.handleSelect}
         multi={true}
       />
@@ -26,25 +20,13 @@ class SelectFilter extends Component {
   }
 
   handleSelect = value => {
-    this.setState({ selected: value });
     this.props.selectArticles(value);
-  };
-
-  handleClick = ev => {
-    this.setState({
-      options: this.props.articles.map(article => {
-        return {
-          label: article.title,
-          value: article.id
-        };
-      })
-    });
   };
 }
 
 export default connect(
   state => {
-    return { articles: state.articles };
+    return { articles: state.articles, selected: state.filters.selected };
   },
   { selectArticles }
 )(SelectFilter);

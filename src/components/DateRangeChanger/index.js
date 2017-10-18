@@ -3,57 +3,29 @@ import DayPicker, { DateUtils } from "react-day-picker";
 import "react-day-picker/lib/style.css";
 import moment from "moment";
 import { connect } from "react-redux";
-import { changeDateRangeArticles } from "../../AC";
+import { changeDateRange } from "../../AC";
 
 class DateRangeChanger extends Component {
-  state = {
-    from: null,
-    to: null
-  };
   handleDayClick = day => {
-    const range = DateUtils.addDayToRange(day, this.state);
-    this.setState(range);
-    this.props.changeDateRangeArticles(range);
+    const { changeDateRange, range } = this.props;
+
+    changeDateRange(DateUtils.addDayToRange(day, range));
   };
-  handleResetClick = e => {
-    e.preventDefault();
-    let resetRange = {
-      from: null,
-      to: null
-    };
-    this.setState(resetRange);
-    this.props.changeDateRangeArticles(resetRange);
-  };
+
   render() {
-    const { from, to } = this.state;
+    const publishedArticles = this.props.articles.map(article => {
+      return article.date;
+    });
+
+    const { from, to } = this.props.range;
     return (
       <div className="RangeExample">
-        {!from &&
-          !to && (
-            <p>
-              Please select the <strong>first day</strong>.
-            </p>
-          )}
-        {from &&
-          !to && (
-            <p>
-              Please select the <strong>last day</strong>.
-            </p>
-          )}
-        {from &&
-          to && (
-            <p>
-              You chose from {moment(from).format("L")} to{" "}
-              {moment(to).format("L")}
-              .{" "}
-              <a href="." onClick={this.handleResetClick}>
-                Reset
-              </a>
-            </p>
-          )}
         <DayPicker
-          numberOfMonths={2}
-          selectedDays={[from, { from, to }]}
+          numberOfMonths={3}
+          selectedDays={[
+            ...publishedArticles,
+            day => DateUtils.isDayInRange(day, { from, to })
+          ]}
           onDayClick={this.handleDayClick}
           fixedWeeks
         />
@@ -62,4 +34,9 @@ class DateRangeChanger extends Component {
   }
 }
 
-export default connect(null, { changeDateRangeArticles })(DateRangeChanger);
+export default connect(
+  state => {
+    return { articles: state.articles, range: state.filters.dateRange };
+  },
+  { changeDateRange }
+)(DateRangeChanger);
