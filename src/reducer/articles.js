@@ -1,5 +1,5 @@
 import { DELETE_ARTICLE, SELECT_FILTER, CHANGE_DATE_RANGE } from "../constants";
-import { articles as defaultArticles } from "../fixtures";
+import { normalizedArticles as defaultArticles } from "../fixtures";
 
 export default (
   articles = JSON.parse(JSON.stringify(defaultArticles), (key, value) => {

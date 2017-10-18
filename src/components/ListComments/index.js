@@ -36,8 +36,8 @@ class ListComments extends Component {
   getComments() {
     if (!this.props.show) return null;
     if (this.props.comments.length <= 0) return <p>No comments</p>;
-    return this.props.comments.map(comment => {
-      return <Comment comment={comment} key={comment.id} />;
+    return this.props.comments.map(id => {
+      return <Comment commentId={id} key={id} />;
     });
   }
 

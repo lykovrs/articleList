@@ -13,29 +13,11 @@ class ListArticles extends Component {
   };
 
   render() {
-    const { from, to } = this.props.range;
-    const { selected, articles } = this.props;
-    let articleElements = [];
-
-    if (!from && !to) {
-      articleElements = articles;
-    }
-
-    if (from && to) {
-      articleElements = articles.filter(item => {
-        return +from <= item.date && item.date <= +to;
-      });
-    }
-
-    if (selected.length) {
-      articleElements = articles.filter(article => {
-        return selected.some(item => {
-          return article.id == item.value;
-        });
-      });
-    }
-
-    let articleNodes = articleElements.map(article => {
+    /**
+     * Генерируем список статей с учетом фильтрации
+     * @type {Article[]}
+     */
+    let articleNodes = this.props.articles.map(article => {
       return (
         <Article
           article={article}
@@ -50,9 +32,38 @@ class ListArticles extends Component {
 }
 
 export default connect(state => {
+  const { from, to } = state.filters.dateRange;
+  const { selected } = state.filters;
+  const { articles } = state;
+  let articleElements = [];
+
+  /**
+   * Если нет параметров для фильтрации, просто отдаем все статьи
+   * @param  {Date} from Начало периода фильра дат
+   * @param  {Date} to   Конец период фильтра дат
+   */
+  if (!from && !to) {
+    articleElements = articles;
+  }
+
+  if (from && to) {
+    articleElements = articles.filter(item => {
+      return +from <= item.date && item.date <= +to;
+    });
+  }
+  /**
+   * Если есть значения в массиве выбранных значений селекта, филтьруем записи
+   * @param  {Object[]} selected Значение фильтра выбранных статей из селекта
+   */
+  if (selected.length) {
+    articleElements = articles.filter(article => {
+      return selected.some(item => {
+        return article.id == item.value;
+      });
+    });
+  }
+
   return {
-    articles: state.articles,
-    range: state.filters.dateRange,
-    selected: state.filters.selected
+    articles: articleElements
   };
 }, {})(accordion(ListArticles));
