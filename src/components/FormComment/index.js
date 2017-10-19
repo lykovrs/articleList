@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 
+/**
+ * Компонент формы добавления комментария в список комментариев
+ */
 class FormComment extends Component {
   state = {
     userName: "",
     userText: ""
   };
 
+  /**
+   * render
+   * @return {ReactElement} разметка
+   */
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -24,7 +31,7 @@ class FormComment extends Component {
           Comment<input
             type="textarea"
             name="userText"
-            onChange={this.handleIput}
+            onChange={this.handleInput}
             value={this.state.userText}
           />
         </label>
@@ -34,16 +41,21 @@ class FormComment extends Component {
     );
   }
 
-  handleIput = ev => {
+  /**
+   * Обрабатываем ввод в поля формы и отправляем в стэйт
+   * @param  {[type]} ev Event
+   */
+  handleInput = ev => {
     this.setState({
       [ev.target.name]: ev.target.value
     });
   };
-
+  /**
+   * Обработка отправки формы
+   * @param  {[type]} ev [description]
+   */
   handleSubmit = ev => {
     ev.preventDefault();
-
-    console.log(this.state);
     this.setState({
       userName: "",
       userText: ""

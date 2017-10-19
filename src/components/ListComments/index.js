@@ -6,6 +6,9 @@ import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import "./style.css";
 import FormComment from "./../FormComment/index";
 
+/**
+ * Компонент списка комментариев с декоратором toggleOpen
+ */
 class ListComments extends Component {
   static propTypes = {
     show: PropTypes.bool,
@@ -13,6 +16,10 @@ class ListComments extends Component {
     comment: PropTypes.array
   };
 
+  /**
+   * render
+   * @return {ReactElement} разметка
+   */
   render() {
     const { toggleOpen, show } = this.props;
     return (
@@ -29,10 +36,20 @@ class ListComments extends Component {
       </div>
     );
   }
+
+  /**
+   * Создает форму добавления комментария
+   * @return {ReactElement} компонент формы
+   */
   getFormComments() {
     if (!this.props.show) return null;
     return <FormComment />;
   }
+
+  /**
+   * Генерируем список комментариев
+   * @return {ReactElement[]} набор комментариев
+   */
   getComments() {
     if (!this.props.show) return null;
     if (this.props.comments.length <= 0) return <p>No comments</p>;
@@ -41,8 +58,14 @@ class ListComments extends Component {
     });
   }
 
+  /**
+   * Получаем DOM элемент
+   * @param  {HTMLElement} ref DOM элемент
+   * @return {HTMLElement}     DOM элемент
+   */
   getListCommentRef(ref) {
     console.log("--> list comments container ", ref);
+    return ref;
   }
 }
 

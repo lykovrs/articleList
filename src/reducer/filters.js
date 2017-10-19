@@ -8,6 +8,12 @@ let defaultFilters = {
   }
 };
 
+/**
+ * Редьюссер хранения и обработки данных фильтрации
+ * @param  {Object} [filters=defaultFilters] принимает объект для работы с фильтрами
+ * @param  {Object} action                   обект экшена
+ * @return {Object}                          параметры фильтрации
+ */
 export default (filters = defaultFilters, action) => {
   const { type, payload } = action;
   switch (type) {
@@ -20,7 +26,6 @@ export default (filters = defaultFilters, action) => {
       break;
 
     default:
-      console.log("default range");
       return filters;
   }
 };

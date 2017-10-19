@@ -6,6 +6,9 @@ import "./style.css";
 import { connect } from "react-redux";
 import { deleteArticle } from "../../AC";
 
+/**
+ * Компонент статьи
+ */
 class Article extends Component {
   static propTypes = {
     article: PropTypes.shape({
@@ -19,6 +22,10 @@ class Article extends Component {
     toggleOpen: PropTypes.func
   };
 
+  /**
+   * render
+   * @return {ReactElement} разметка
+   */
   render() {
     const { article, isOpen, toggleOpen } = this.props;
 
@@ -38,6 +45,10 @@ class Article extends Component {
     );
   }
 
+  /**
+   * Получаем тело статьи
+   * @return {ReactElement} текст статьи и список комментариев
+   */
   getBody() {
     if (!this.props.isOpen()) return null;
     return (
@@ -47,6 +58,10 @@ class Article extends Component {
     );
   }
 
+  /**
+   * Получаем список комментариев
+   * @return {ReactElement} список комментариев
+   */
   getComments() {
     const comments = this.props.article.comments
       ? this.props.article.comments
@@ -54,6 +69,10 @@ class Article extends Component {
     return <ListComments comments={comments} />;
   }
 
+  /**
+   * Удаляем статью
+   * @param  {[type]} ev Event
+   */
   handleRemove = ev => {
     ev.preventDefault();
     this.props.deleteArticle(this.props.article.id);

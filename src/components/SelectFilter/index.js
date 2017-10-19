@@ -4,7 +4,14 @@ import "react-select/dist/react-select.css";
 import { connect } from "react-redux";
 import { selectArticles } from "../../AC";
 
+/**
+ * Компонент фильтра выбора статей при помощи Select
+ */
 class SelectFilter extends Component {
+  /**
+   * render
+   * @return {ReactElement} разметка
+   */
   render() {
     return (
       <Select
@@ -18,8 +25,12 @@ class SelectFilter extends Component {
       />
     );
   }
-
+  /**
+   * Колбэк выбора значений в селекте
+   * @param  {array} value текущее выбранное значение
+   */
   handleSelect = value => {
+    console.log(value);
     this.props.selectArticles(value);
   };
 }

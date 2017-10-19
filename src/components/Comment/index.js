@@ -2,6 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+/**
+ * Компонент комментария для списка
+ */
 const Comment = props => {
   const { comment, commentId } = props;
   return (
@@ -21,19 +24,15 @@ Comment.propTypes = {
 };
 
 export default connect((state, props) => {
-  let comment = null;
-  let comments = state.comments;
+  const { comments } = state;
+  const id = props.commentId;
 
   /**
    * Проходим массив комментариев,сохраняем нужный по id
    */
-  comments.forEach(item => {
-    if (item.id === props.commentId) {
-      comment = item;
-    }
-  });
-
   return {
-    comment
+    comment: comments.find(item => {
+      return item.id === id;
+    })
   };
 }, {})(Comment);

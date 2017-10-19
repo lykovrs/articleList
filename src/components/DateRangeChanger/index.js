@@ -5,13 +5,14 @@ import moment from "moment";
 import { connect } from "react-redux";
 import { changeDateRange } from "../../AC";
 
+/**
+ * Компонент фильтра выбора диапазона дат
+ */
 class DateRangeChanger extends Component {
-  handleDayClick = day => {
-    const { changeDateRange, range } = this.props;
-
-    changeDateRange(DateUtils.addDayToRange(day, range));
-  };
-
+  /**
+   * render
+   * @return {ReactElement} разметка
+   */
   render() {
     const publishedArticles = this.props.articles.map(article => {
       return article.date;
@@ -32,6 +33,16 @@ class DateRangeChanger extends Component {
       </div>
     );
   }
+
+  /**
+   * Колбэк клипа по дате, устанавливает диапазон
+   * @param  {[type]} day [description]
+   * @return {[type]}     [description]
+   */
+  handleDayClick = day => {
+    const { changeDateRange, range } = this.props;
+    changeDateRange(DateUtils.addDayToRange(day, range));
+  };
 }
 
 export default connect(

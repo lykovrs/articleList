@@ -5,7 +5,14 @@ import ListArticles from "../ListArticles";
 import SelectFilter from "../SelectFilter";
 import DateRangeChanger from "../DateRangeChanger";
 
+/**
+ * Компонент приложения с базовой разметкой
+ */
 class App extends Component {
+  /**
+   * render
+   * @return {ReactElement} разметка
+   */
   render() {
     return (
       <div className="App">
