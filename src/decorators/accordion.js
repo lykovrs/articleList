@@ -8,7 +8,7 @@ export default Component =>
   class Accordion extends Component {
     /**
      * Храним состояние текущего открытого компонента
-     * @type {Object}
+     * @type {object}
      */
     state = {
       openItemId: null

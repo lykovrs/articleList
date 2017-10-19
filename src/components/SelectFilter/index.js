@@ -3,6 +3,7 @@ import Select from "react-select";
 import "react-select/dist/react-select.css";
 import { connect } from "react-redux";
 import { selectArticles } from "../../AC";
+import { mapToArray } from "../../utils";
 
 /**
  * Компонент фильтра выбора статей при помощи Select
@@ -37,7 +38,10 @@ class SelectFilter extends Component {
 
 export default connect(
   state => {
-    return { articles: state.articles, selected: state.filters.selected };
+    return {
+      articles: mapToArray(state.articles),
+      selected: state.filters.selected
+    };
   },
   { selectArticles }
 )(SelectFilter);

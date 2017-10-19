@@ -27,12 +27,7 @@ export default connect((state, props) => {
   const { comments } = state;
   const id = props.commentId;
 
-  /**
-   * Проходим массив комментариев,сохраняем нужный по id
-   */
   return {
-    comment: comments.find(item => {
-      return item.id === id;
-    })
+    comment: comments[id]
   };
 }, {})(Comment);

@@ -10,9 +10,9 @@ let defaultFilters = {
 
 /**
  * Редьюссер хранения и обработки данных фильтрации
- * @param  {Object} [filters=defaultFilters] принимает объект для работы с фильтрами
- * @param  {Object} action                   обект экшена
- * @return {Object}                          параметры фильтрации
+ * @param  {object} [filters=defaultFilters] принимает объект для работы с фильтрами
+ * @param  {object} action                   обект экшена
+ * @return {object}                          параметры фильтрации
  */
 export default (filters = defaultFilters, action) => {
   const { type, payload } = action;

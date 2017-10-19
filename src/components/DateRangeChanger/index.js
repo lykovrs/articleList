@@ -4,6 +4,7 @@ import "react-day-picker/lib/style.css";
 import moment from "moment";
 import { connect } from "react-redux";
 import { changeDateRange } from "../../AC";
+import { mapToArray } from "../../utils";
 
 /**
  * Компонент фильтра выбора диапазона дат
@@ -47,7 +48,10 @@ class DateRangeChanger extends Component {
 
 export default connect(
   state => {
-    return { articles: state.articles, range: state.filters.dateRange };
+    return {
+      articles: mapToArray(state.articles),
+      range: state.filters.dateRange
+    };
   },
   { changeDateRange }
 )(DateRangeChanger);

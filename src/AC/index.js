@@ -7,7 +7,7 @@ import {
 /**
  * Создает экшн удаления стаьи по id
  * @param  {string} id удаляемой статьи
- * @return {Object}    объект экшена
+ * @return {object}    объект экшена
  */
 export function deleteArticle(id) {
   const action = {
@@ -22,7 +22,7 @@ export function deleteArticle(id) {
 /**
  * Создает экшн выбора статей из селекта
  * @param  {array} selected массив выбранных статей
- * @return {Object}         объект экшена
+ * @return {object}         объект экшена
  */
 export function selectArticles(selected) {
   const action = {
@@ -36,8 +36,8 @@ export function selectArticles(selected) {
 }
 /**
  * Создает экшн выбора диапазона дат для статей
- * @param  {Object} dateRange объект с полями from to диапазона значений
- * @return {Object}           объект экшена
+ * @param  {object} dateRange объект с полями from to диапазона значений
+ * @return {object}           объект экшена
  */
 export function changeDateRange(dateRange) {
   const action = {

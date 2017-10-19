@@ -1,8 +1,11 @@
 import { normalizedComments as defaultComments } from "../fixtures";
+import { arrayToMap } from "../utils";
+
+const optimized = arrayToMap(defaultComments); // оптимизируем данные из массива в объект
 
 /**
  * Редьюсер списка комментариев
- * @param  {array} [comments=defaultComments] массив комментариев и начальное значение
+ * @param  {array} [comments=optimized] массив комментариев и начальное значение
  * @param  {[Object} action                     обект экшена
  * @return {array}                            список комментариев
  */
