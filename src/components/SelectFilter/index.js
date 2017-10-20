@@ -39,7 +39,7 @@ class SelectFilter extends Component {
 export default connect(
   state => {
     return {
-      articles: mapToArray(state.articles),
+      articles: mapToArray(state.articles.entities),
       selected: state.filters.selected
     };
   },

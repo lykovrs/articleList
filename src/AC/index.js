@@ -1,7 +1,8 @@
 import {
   DELETE_ARTICLE,
   CHANGE_SELECTION,
-  CHANGE_DATE_RANGE
+  CHANGE_DATE_RANGE,
+  LOAD_ALL_ARTICLES
 } from "../constants";
 
 /**
@@ -45,6 +46,19 @@ export function changeDateRange(dateRange) {
     payload: {
       dateRange
     }
+  };
+
+  return action;
+}
+
+/**
+ * Создает экшн для запроса всех статей
+ * @return {object} объект экшена
+ */
+export function callAllArticles() {
+  const action = {
+    type: LOAD_ALL_ARTICLES,
+    callAPI: "http://localhost:3001/api/article"
   };
 
   return action;

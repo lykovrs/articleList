@@ -16,7 +16,7 @@ class DateRangeChanger extends Component {
    */
   render() {
     const publishedArticles = this.props.articles.map(article => {
-      return article.date;
+      return new Date(article.date);
     });
 
     const { from, to } = this.props.range;
@@ -49,7 +49,7 @@ class DateRangeChanger extends Component {
 export default connect(
   state => {
     return {
-      articles: mapToArray(state.articles),
+      articles: mapToArray(state.articles.entities),
       range: state.filters.dateRange
     };
   },

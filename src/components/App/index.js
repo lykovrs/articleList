@@ -4,6 +4,8 @@ import "./style.css";
 import ListArticles from "../ListArticles";
 import SelectFilter from "../SelectFilter";
 import DateRangeChanger from "../DateRangeChanger";
+import { connect } from "react-redux";
+import { callAllArticles } from "../../AC";
 
 /**
  * Компонент приложения с базовой разметкой
@@ -30,6 +32,11 @@ class App extends Component {
       </div>
     );
   }
+
+  componentDidMount() {
+    console.log("app did mount");
+    this.props.callAllArticles();
+  }
 }
 
-export default App;
+export default connect(null, { callAllArticles })(App);

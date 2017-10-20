@@ -1,29 +1,44 @@
-import { DELETE_ARTICLE, SELECT_FILTER, CHANGE_DATE_RANGE } from "../constants";
-import { normalizedArticles as defaultArticles } from "../fixtures";
+import {
+  DELETE_ARTICLE,
+  SELECT_FILTER,
+  CHANGE_DATE_RANGE,
+  LOAD_ALL_ARTICLES,
+  START,
+  SUCCESS,
+  FAIL
+} from "../constants";
 import { arrayToMap } from "../utils";
 
-let optimized = arrayToMap(defaultArticles); // оптимизируем данные из массива в объект
-//превращаем даты в объект Date
-optimized = JSON.parse(JSON.stringify(optimized), (key, value) => {
-  if (key == "date") return new Date(value);
-  return value;
-});
+const defaultState = {
+  isLoading: false,
+  entities: {}
+};
 
 /**
  * Редьюсер для спистк статей
- * @param  {object} [articles=optimized] Десереализуем список статей и делаем значение по умолчанию
+ * @param  {object} [state] Десереализуем список статей и делаем значение по умолчанию
  * @param  {object} action обект экшена
  * @return {array}  Список статей
  */
-export default (articles = optimized, action) => {
+export default (state = defaultState, action) => {
   const { type, payload } = action;
   switch (type) {
+    case LOAD_ALL_ARTICLES + START:
+      return { ...state, isLoading: true };
+      break;
+    case LOAD_ALL_ARTICLES + SUCCESS:
+      return {
+        ...state,
+        entities: arrayToMap(action.allArticles),
+        isLoading: false
+      };
+      break;
     case DELETE_ARTICLE:
-      delete articles[payload.id];
-      return Object.assign({}, articles);
+      delete state.entities[payload.id];
+      return Object.assign({}, state);
       break;
 
     default:
-      return articles;
+      return state;
   }
 };

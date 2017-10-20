@@ -4,7 +4,8 @@
  * @return {object}    обект с хэш-ключами из id
  */
 export function arrayToMap(arr) {
-  return arr.reduce((p, c) => ({ ...p, [c.id]: c }), {});
+  if (arr) return arr.reduce((p, c) => ({ ...p, [c.id]: c }), {});
+  return null;
 }
 
 /**
@@ -13,5 +14,6 @@ export function arrayToMap(arr) {
  * @return {array}      массив с обектами с полем id
  */
 export function mapToArray(map) {
-  return Object.keys(map).map(item => map[item]);
+  if (map) return Object.keys(map).map(item => map[item]);
+  return null;
 }

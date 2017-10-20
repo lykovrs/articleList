@@ -15,7 +15,7 @@ class Article extends Component {
       id: PropTypes.string.isRequired,
       date: PropTypes.Date,
       title: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
+      text: PropTypes.string,
       comments: PropTypes.array
     }),
     isOpen: PropTypes.func,
