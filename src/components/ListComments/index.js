@@ -52,7 +52,6 @@ class ListComments extends Component {
    * @return {ReactElement[]} набор комментариев
    */
   getComments() {
-    console.log("getComments", this.props.comments);
     if (!this.props.show) return null;
     if (this.props.comments.length <= 0) return <p>No comments</p>;
     return this.props.comments.map(id => {

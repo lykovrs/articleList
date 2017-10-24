@@ -20,7 +20,8 @@ const ArticleModel = Record({
   title: null,
   text: null,
   comments: [],
-  isLoading: false
+  isLoading: false,
+  isLoaded: false
 });
 
 const defaultState = new DefaulrReducerState();
@@ -51,7 +52,10 @@ export default (state = defaultState, action) => {
     case LOAD_ARTICLE + SUCCESS:
       return state
         .setIn(["allArticles", payload.id, "isLoading"], false)
-        .setIn(["allArticles", payload.id], new ArticleModel(allArticles));
+        .setIn(
+          ["allArticles", payload.id],
+          new ArticleModel({ ...allArticles, isLoaded: true })
+        );
 
       break;
     case DELETE_ARTICLE:
@@ -61,9 +65,6 @@ export default (state = defaultState, action) => {
     case ADD_COMMENT:
       const { randomId } = action;
       const { articleId } = payload.newComment;
-
-      console.log("ADD_COMMENT ===>", payload, randomId);
-
       return state.updateIn(["allArticles", articleId, "comments"], comments =>
         comments.concat(randomId)
       );

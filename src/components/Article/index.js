@@ -49,7 +49,7 @@ class Article extends Component {
   componentWillReceiveProps = nextProps => {
     if (
       nextProps.isOpen() &&
-      !this.props.article.text &&
+      !this.props.article.isLoaded &&
       !this.props.article.isLoading
     )
       nextProps.loadArticle(nextProps.article.id);
