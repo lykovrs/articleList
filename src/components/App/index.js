@@ -24,9 +24,9 @@ class App extends Component {
         </header>
         <p className="App-intro">Hello!</p>
 
-        {/* <DateRangeChanger />
+        <DateRangeChanger />
 
-        <SelectFilter /> */}
+        <SelectFilter />
 
         <ListArticles />
       </div>

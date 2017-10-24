@@ -31,7 +31,6 @@ class SelectFilter extends Component {
    * @param  {array} value текущее выбранное значение
    */
   handleSelect = value => {
-    console.log(value);
     this.props.selectArticles(value);
   };
 }
@@ -39,7 +38,7 @@ class SelectFilter extends Component {
 export default connect(
   state => {
     return {
-      articles: mapToArray(state.articles.entities),
+      articles: mapToArray(state.articles.allArticles),
       selected: state.filters.selected
     };
   },

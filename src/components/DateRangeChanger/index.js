@@ -49,7 +49,7 @@ class DateRangeChanger extends Component {
 export default connect(
   state => {
     return {
-      articles: mapToArray(state.articles.entities),
+      articles: mapToArray(state.articles.allArticles),
       range: state.filters.dateRange
     };
   },
