@@ -16,10 +16,10 @@ const Comment = props => {
 };
 
 Comment.propTypes = {
-  commentId: PropTypes.number.isRequired,
+  commentId: PropTypes.any,
   comment: PropTypes.shape({
-    user: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired
+    user: PropTypes.string,
+    text: PropTypes.string
   })
 };
 
@@ -28,6 +28,6 @@ export default connect((state, props) => {
   const id = props.commentId;
 
   return {
-    comment: comments[id]
+    comment: comments.get(id)
   };
 }, {})(Comment);

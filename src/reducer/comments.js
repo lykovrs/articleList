@@ -1,5 +1,7 @@
+import { ADD_COMMENT } from "../constants";
 import { normalizedComments as defaultComments } from "../fixtures";
 import { arrayToMap } from "../utils";
+import { Map } from "immutable";
 
 const optimized = arrayToMap(defaultComments); // оптимизируем данные из массива в объект
 
@@ -9,12 +11,12 @@ const optimized = arrayToMap(defaultComments); // оптимизируем да�
  * @param  {[Object} action                     обект экшена
  * @return {array}                            список комментариев
  */
-export default (comments = defaultComments, action) => {
-  const { type, payload } = action;
+export default (comments = optimized, action) => {
+  const { type, payload, randomId } = action;
   switch (type) {
-    // case DELETE_ARTICLE:
-    //   return articles.filter(article => payload.id !== article.id);
-    //   break;
+    case ADD_COMMENT:
+      return comments.set(randomId, payload.newComment);
+      break;
 
     default:
       return comments;

@@ -49,11 +49,11 @@ class ListArticles extends Component {
 export default connect(state => {
   const { from, to } = state.filters.dateRange;
   const { selected } = state.filters;
-  let articles = state.articles.entities;
+  let articles = [];
   let loading = state.articles.isLoading;
   let articleElements = [];
 
-  articles = mapToArray(articles);
+  articles = mapToArray(state.articles.allArticles);
 
   /**
     * Если нет параметров для фильтрации, просто отдаем все статьи

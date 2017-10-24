@@ -3,16 +3,26 @@ import {
   SELECT_FILTER,
   CHANGE_DATE_RANGE,
   LOAD_ALL_ARTICLES,
+  LOAD_ARTICLE,
   START,
   SUCCESS,
-  FAIL
+  FAIL,
+  ADD_COMMENT
 } from "../constants";
-import { arrayToMap } from "../utils";
+import { arrayToMap, mapToArray } from "../utils";
+import { Record } from "immutable";
+import { DefaulrReducerState } from "./helpers";
+//
+// const makePerson = Record({ name: null, favoriteColor: 'unknown' });
+const ArticleModel = Record({
+  id: null,
+  date: null,
+  title: null,
+  text: null,
+  comments: []
+});
 
-const defaultState = {
-  isLoading: false,
-  entities: {}
-};
+const defaultState = new DefaulrReducerState();
 
 /**
  * Редьюсер для спистк статей
@@ -21,21 +31,41 @@ const defaultState = {
  * @return {array}  Список статей
  */
 export default (state = defaultState, action) => {
-  const { type, payload } = action;
+  const { type, payload, allArticles } = action;
+
   switch (type) {
     case LOAD_ALL_ARTICLES + START:
-      return { ...state, isLoading: true };
+      return state.set("isLoading", true);
       break;
     case LOAD_ALL_ARTICLES + SUCCESS:
-      return {
-        ...state,
-        entities: arrayToMap(action.allArticles),
-        isLoading: false
-      };
+      return state
+        .set("isLoading", false)
+        .set("allArticles", arrayToMap(allArticles, ArticleModel));
+      break;
+
+    case LOAD_ARTICLE + START:
+      return state.set("isLoading", true);
+      break;
+
+    case LOAD_ARTICLE + SUCCESS:
+      return state
+        .set("isLoading", false)
+        .setIn(["allArticles", payload.id, "text"], "text");
+
       break;
     case DELETE_ARTICLE:
-      delete state.entities[payload.id];
-      return Object.assign({}, state);
+      return state.deleteIn(["allArticles", payload.id]);
+      break;
+
+    case ADD_COMMENT:
+      const { randomId } = action;
+      const { articleId } = payload.newComment;
+
+      console.log("ADD_COMMENT ===>", payload, randomId);
+
+      return state.updateIn(["allArticles", articleId, "comments"], comments =>
+        comments.concat(randomId)
+      );
       break;
 
     default:

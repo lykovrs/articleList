@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { addComment } from "../../AC";
 
 /**
  * Компонент формы добавления комментария в список комментариев
  */
-class FormComment extends Component {
+class AddComment extends Component {
   state = {
     userName: "",
     userText: ""
@@ -22,13 +24,14 @@ class FormComment extends Component {
           Name<input
             type="text"
             name="userName"
-            onChange={this.handleIput}
+            onChange={this.handleInput}
             value={this.state.userName}
           />
         </label>
 
         <label>
-          Comment<input
+          Comment
+          <input
             type="textarea"
             name="userText"
             onChange={this.handleInput}
@@ -60,7 +63,12 @@ class FormComment extends Component {
       userName: "",
       userText: ""
     });
+    this.props.addComment({
+      user: ev.target.userName.value,
+      text: ev.target.userText.value,
+      articleId: this.props.articleId
+    });
   };
 }
 
-export default FormComment;
+export default connect(null, { addComment })(AddComment);

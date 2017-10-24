@@ -2,7 +2,9 @@ import {
   DELETE_ARTICLE,
   CHANGE_SELECTION,
   CHANGE_DATE_RANGE,
-  LOAD_ALL_ARTICLES
+  LOAD_ALL_ARTICLES,
+  LOAD_ARTICLE,
+  ADD_COMMENT
 } from "../constants";
 
 /**
@@ -59,6 +61,37 @@ export function callAllArticles() {
   const action = {
     type: LOAD_ALL_ARTICLES,
     callAPI: "http://localhost:3001/api/article"
+  };
+
+  return action;
+}
+
+/**
+ * Создает экшн для запроса текста статьи
+ * @return {object} объект экшена
+ */
+export function loadArticle(id) {
+  const action = {
+    type: LOAD_ARTICLE,
+    payload: { id },
+    callAPI: `http://localhost:3001/api/article/${id}`
+  };
+
+  return action;
+}
+
+/**
+ * Создает экшн добавления комментария
+ * @param  {object} newComment объект с полями нового комментария
+ * @return {object}            объект экшена
+ */
+export function addComment(newComment) {
+  const action = {
+    type: ADD_COMMENT,
+    payload: {
+      newComment
+    },
+    generatedId: true
   };
 
   return action;

@@ -24,17 +24,19 @@ class App extends Component {
         </header>
         <p className="App-intro">Hello!</p>
 
-        <DateRangeChanger />
+        {/* <DateRangeChanger />
 
-        <SelectFilter />
+        <SelectFilter /> */}
 
         <ListArticles />
       </div>
     );
   }
 
+  /**
+   * Делаем запрос всех статей с сервера
+   */
   componentDidMount() {
-    console.log("app did mount");
     this.props.callAllArticles();
   }
 }
