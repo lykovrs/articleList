@@ -16,10 +16,10 @@ export default store => next => action => {
       }
       return response.json();
     })
-    .then(function(allArticles) {
+    .then(function(collection) {
       // TODO: dev only !!!!
       setTimeout(() => {
-        next({ ...rest, type: type + SUCCESS, allArticles });
+        next({ ...rest, type: type + SUCCESS, collection });
       }, 2000);
     })
     .catch(function(err) {

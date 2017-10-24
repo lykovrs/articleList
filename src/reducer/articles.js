@@ -33,7 +33,7 @@ const defaultState = new DefaulrReducerState();
  * @return {array}  Список статей
  */
 export default (state = defaultState, action) => {
-  const { type, payload, allArticles } = action;
+  const { type, payload, collection } = action;
 
   switch (type) {
     case LOAD_ALL_ARTICLES + START:
@@ -42,30 +42,30 @@ export default (state = defaultState, action) => {
     case LOAD_ALL_ARTICLES + SUCCESS:
       return state
         .set("isLoading", false)
-        .set("allArticles", arrayToMap(allArticles, ArticleModel));
+        .set("collection", arrayToMap(collection, ArticleModel));
       break;
 
     case LOAD_ARTICLE + START:
-      return state.setIn(["allArticles", payload.id, "isLoading"], true);
+      return state.setIn(["collection", payload.id, "isLoading"], true);
       break;
 
     case LOAD_ARTICLE + SUCCESS:
       return state
-        .setIn(["allArticles", payload.id, "isLoading"], false)
+        .setIn(["collection", payload.id, "isLoading"], false)
         .setIn(
-          ["allArticles", payload.id],
-          new ArticleModel({ ...allArticles, isLoaded: true })
+          ["collection", payload.id],
+          new ArticleModel({ ...collection, isLoaded: true })
         );
 
       break;
     case DELETE_ARTICLE:
-      return state.deleteIn(["allArticles", payload.id]);
+      return state.deleteIn(["collection", payload.id]);
       break;
 
     case ADD_COMMENT:
       const { randomId } = action;
       const { articleId } = payload.newComment;
-      return state.updateIn(["allArticles", articleId, "comments"], comments =>
+      return state.updateIn(["collection", articleId, "comments"], comments =>
         comments.concat(randomId)
       );
       break;

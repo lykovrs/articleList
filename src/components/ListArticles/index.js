@@ -53,7 +53,7 @@ export default connect(state => {
   let loading = state.articles.isLoading;
   let articleElements = [];
 
-  articles = mapToArray(state.articles.allArticles);
+  articles = mapToArray(state.articles.collection);
 
   /**
     * Если нет параметров для фильтрации, просто отдаем все статьи
