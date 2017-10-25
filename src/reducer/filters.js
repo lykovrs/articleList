@@ -1,12 +1,12 @@
 import { CHANGE_DATE_RANGE, CHANGE_SELECTION } from "../constants";
+import { Record, Map } from "immutable";
 
-let defaultFilters = {
+const FiltersModel = new Record({
   selected: [],
-  dateRange: {
-    from: null,
-    to: null
-  }
-};
+  dateRange: new Map()
+});
+
+const defaultFilters = new FiltersModel();
 
 /**
  * Редьюссер хранения и обработки данных фильтрации
@@ -18,12 +18,10 @@ export default (filters = defaultFilters, action) => {
   const { type, payload } = action;
   switch (type) {
     case CHANGE_DATE_RANGE:
-      return { ...filters, dateRange: payload.dateRange };
-      break;
+      return filters.setIn(["dateRange"], payload.dateRange);
 
     case CHANGE_SELECTION:
-      return { ...filters, selected: payload.selected };
-      break;
+      return filters.setIn(["selected"], payload.selected);
 
     default:
       return filters;

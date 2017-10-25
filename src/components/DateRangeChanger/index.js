@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DayPicker, { DateUtils } from "react-day-picker";
 import "react-day-picker/lib/style.css";
-import moment from "moment";
+// import moment from "moment";
 import { connect } from "react-redux";
 import { changeDateRange } from "../../AC";
 import { mapToArray } from "../../utils";

@@ -3,7 +3,7 @@ import Article from "../Article";
 import accordion from "./../../decorators/accordion";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { mapToArray } from "../../utils";
+import { filteredArticlesSelector } from "../../selectors";
 import Preloader from "../Preloader";
 
 /**
@@ -20,6 +20,7 @@ class ListArticles extends Component {
    * @return {ReactElement} разметка
    */
   render() {
+    console.log("===++> 2");
     let articleNodes = this.props.articles.map(article => {
       return (
         <Article
@@ -47,43 +48,8 @@ class ListArticles extends Component {
 }
 
 export default connect(state => {
-  const { from, to } = state.filters.dateRange;
-  const { selected } = state.filters;
-  let articles = [];
-  let loading = state.articles.isLoading;
-  let articleElements = [];
-
-  articles = mapToArray(state.articles.collection);
-
-  /**
-    * Если нет параметров для фильтрации, просто отдаем все статьи
-    * @param  {Date} from Начало периода фильра дат
-    * @param  {Date} to   Конец период фильтра дат
-    */
-  if (!from && !to) {
-    articleElements = articles;
-  }
-
-  if (from && to) {
-    articleElements = articles.filter(item => {
-      let date = new Date(item.date);
-      return +from <= date && date <= +to;
-    });
-  }
-  /**
-    * Если есть значения в массиве выбранных значений селекта, филтьруем записи
-    * @param  {Object[]} selected Значение фильтра выбранных статей из селекта
-    */
-  if (selected.length) {
-    articleElements = articles.filter(article => {
-      return selected.some(item => {
-        return article.id === item.value;
-      });
-    });
-  }
-
   return {
-    articles: articleElements,
-    loading
+    articles: filteredArticlesSelector(state),
+    loading: state.articles.isLoading
   };
 }, {})(accordion(ListArticles));

@@ -1,7 +1,6 @@
 import { ADD_COMMENT } from "../constants";
 import { normalizedComments as defaultComments } from "../fixtures";
 import { arrayToMap } from "../utils";
-import { Map } from "immutable";
 
 const optimized = arrayToMap(defaultComments); // оптимизируем данные из массива в объект
 
@@ -16,7 +15,6 @@ export default (comments = optimized, action) => {
   switch (type) {
     case ADD_COMMENT:
       return comments.set(randomId, payload.newComment);
-      break;
 
     default:
       return comments;

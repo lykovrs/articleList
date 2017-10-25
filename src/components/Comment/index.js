@@ -6,7 +6,7 @@ import { connect } from "react-redux";
  * Компонент комментария для списка
  */
 const Comment = props => {
-  const { comment, commentId } = props;
+  const { comment } = props;
   return (
     <blockquote>
       <b>{comment.user}: </b>

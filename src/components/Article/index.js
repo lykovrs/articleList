@@ -28,7 +28,7 @@ class Article extends Component {
    * @return {ReactElement} разметка
    */
   render() {
-    const { article, isOpen, toggleOpen } = this.props;
+    const { article, toggleOpen } = this.props;
 
     return (
       <article>

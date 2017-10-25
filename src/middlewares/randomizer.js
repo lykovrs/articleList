@@ -1,5 +1,4 @@
 import { makeid } from "../utils";
-import { ADD_COMMENT } from "../constants";
 
 export default store => next => action => {
   const { generatedId, ...rest } = action;

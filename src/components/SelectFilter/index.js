@@ -31,12 +31,14 @@ class SelectFilter extends Component {
    * @param  {array} value текущее выбранное значение
    */
   handleSelect = value => {
+    console.log("val selected =>", value);
     this.props.selectArticles(value);
   };
 }
 
 export default connect(
   state => {
+    console.log("selected   ", state.filters.selected);
     return {
       articles: mapToArray(state.articles.collection),
       selected: state.filters.selected

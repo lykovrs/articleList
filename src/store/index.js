@@ -3,7 +3,7 @@ import reducer from "../reducer";
 import logger from "../middlewares/logger";
 import api from "../middlewares/api";
 import randomizer from "../middlewares/randomizer";
-import thunk from "redux-thunk";
+// import thunk from "redux-thunk";
 
 const composeEnhancers =
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
