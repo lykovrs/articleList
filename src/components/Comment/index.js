@@ -24,10 +24,10 @@ Comment.propTypes = {
 };
 
 export default connect((state, props) => {
-  const { comments } = state;
+  const comments = state.comments.collection.records;
   const id = props.commentId;
 
   return {
-    comment: comments.get(id)
+    comment: comments[id]
   };
 }, {})(Comment);

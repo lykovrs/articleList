@@ -4,6 +4,7 @@ import {
   CHANGE_DATE_RANGE,
   LOAD_ALL_ARTICLES,
   LOAD_ARTICLE,
+  LOAD_COMMENTS,
   ADD_COMMENT
 } from "../constants";
 
@@ -75,6 +76,19 @@ export function loadArticle(id) {
     type: LOAD_ARTICLE,
     payload: { id },
     callAPI: `http://localhost:3001/api/article/${id}`
+  };
+
+  return action;
+}
+
+/**
+ * Создает экшн для запроса всех комментариев к статье
+ * @return {object} объект экшена
+ */
+export function callComments(id) {
+  const action = {
+    type: LOAD_COMMENTS,
+    callAPI: `http://localhost:3001/api/comment?${id}`
   };
 
   return action;

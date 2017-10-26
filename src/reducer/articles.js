@@ -23,7 +23,7 @@ const ArticleModel = Record({
 const defaultState = new DefaulrReducerState();
 
 /**
- * Редьюсер для спистк статей
+ * Редьюсер для спистка статей
  * @param  {object} [state] Десереализуем список статей и делаем значение по умолчанию
  * @param  {object} action обект экшена
  * @return {array}  Список статей

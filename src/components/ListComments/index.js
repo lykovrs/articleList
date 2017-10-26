@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import Comment from "./../Comment/index";
+import Comment from "../Comment";
 import toggleOpen from "./../../decorators/toggleOpen";
 import PropTypes from "prop-types";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import "./style.css";
-import AddComment from "./../AddComment/index";
+import AddComment from "../AddComment";
+import { connect } from "react-redux";
+import { callComments } from "../../AC";
 
 /**
  * Компонент списка комментариев с декоратором toggleOpen
@@ -38,6 +40,10 @@ class ListComments extends Component {
     );
   }
 
+  componentWillReceiveProps = nextProps => {
+    if (!this.props.loading) nextProps.callComments(nextProps.articleId);
+  };
+
   /**
    * Создает форму добавления комментария
    * @return {ReactElement} компонент формы
@@ -70,4 +76,11 @@ class ListComments extends Component {
   }
 }
 
-export default toggleOpen(ListComments);
+export default connect(
+  (state, props) => {
+    return {
+      loading: state.comments.isLoading
+    };
+  },
+  { callComments }
+)(toggleOpen(ListComments));

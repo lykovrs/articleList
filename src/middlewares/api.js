@@ -20,7 +20,7 @@ export default store => next => action => {
       // TODO: dev only !!!!
       setTimeout(() => {
         next({ ...rest, type: type + SUCCESS, collection });
-      }, 2000);
+      }, 1000);
     })
     .catch(function(err) {
       next({ ...rest, type: type + FAIL, err });
