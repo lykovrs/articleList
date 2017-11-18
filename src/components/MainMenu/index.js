@@ -8,10 +8,10 @@ const MainMenu = ({}) => (
         <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to="/filters">Filters</Link>
+        <Link to="/news">News</Link>
       </li>
       <li>
-        <Link to="/news">News</Link>
+        <Link to="/about">About</Link>
       </li>
     </ul>
   </nav>

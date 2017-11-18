@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import "./style.css";
-import ListArticles from "../ListArticles";
-import SelectFilter from "../SelectFilter";
-import DateRangeChanger from "../DateRangeChanger";
 import Header from "../Header";
 import MainMenu from "../MainMenu";
 import { connect } from "react-redux";
-import { callAllArticles } from "../../AC";
-import { Switch, Route } from "react-router-dom";
+
+import { Switch, Route, Redirect } from "react-router-dom";
+import HomePage from "../../pages/Home";
+import NewsPage from "../../pages/News";
+import AboutPage from "../../pages/About";
+import EmptyPage from "../../pages/Empty";
 
 /**
  * Компонент приложения с базовой разметкой
@@ -22,23 +23,18 @@ class App extends Component {
       <div className="App">
         <Header />
         <MainMenu />
-        <p className="App-intro">Hello!</p>
+
         <Switch>
-          <Route exact path="/" component={DateRangeChanger} />
-          {/* Оба /roster и /roster/:number начинаются с /roster */}
-          <Route path="/filters" component={SelectFilter} />
-          <Route path="/news" component={ListArticles} />
+          <Route exact path="/" component={HomePage} />
+
+          <Route path="/news" component={NewsPage} />
+          <Route path="/about" component={AboutPage} />
+          <Route path="/empty" component={EmptyPage} />
+          <Redirect to="/empty" />
         </Switch>
       </div>
     );
   }
-
-  /**
-   * Делаем запрос всех статей с сервера
-   */
-  componentDidMount() {
-    this.props.callAllArticles();
-  }
 }
 
-export default connect(null, { callAllArticles })(App);
+export default App;
