@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Article from "../Article";
 import accordion from "./../../decorators/accordion";
 import PropTypes from "prop-types";
-import { callAllArticles } from "../../AC";
+
 import { connect } from "react-redux";
 import { filteredArticlesSelector } from "../../selectors";
 import Preloader from "../Preloader";
@@ -47,23 +47,13 @@ class ListArticles extends Component {
     if (this.props.loading) return <Preloader />;
     return null;
   }
-
-  /**
-   * Делаем запрос всех статей с сервера
-   */
-  componentDidMount() {
-    this.props.callAllArticles();
-  }
 }
 
 export default withRouter(
-  connect(
-    state => {
-      return {
-        articles: filteredArticlesSelector(state),
-        loading: state.articles.isLoading
-      };
-    },
-    { callAllArticles }
-  )(accordion(ListArticles))
+  connect(state => {
+    return {
+      articles: filteredArticlesSelector(state),
+      loading: state.articles.isLoading
+    };
+  }, {})(accordion(ListArticles))
 );

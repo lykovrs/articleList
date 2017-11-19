@@ -3,12 +3,14 @@ import "./style.css";
 import Header from "../Header";
 import MainMenu from "../MainMenu";
 import { connect } from "react-redux";
-
-import { Switch, Route, Redirect } from "react-router-dom";
+import { filteredArticlesSelector } from "../../selectors";
+import { callAllArticles } from "../../AC";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import HomePage from "../../pages/Home";
 import NewsPage from "../../pages/News";
 import AboutPage from "../../pages/About";
 import EmptyPage from "../../pages/Empty";
+import ArticlePage from "../../pages/Article";
 
 /**
  * Компонент приложения с базовой разметкой
@@ -26,7 +28,6 @@ class App extends Component {
 
         <Switch>
           <Route exact path="/" component={HomePage} />
-
           <Route path="/news" component={NewsPage} />
           <Route path="/about" component={AboutPage} />
           <Route path="/empty" component={EmptyPage} />
@@ -35,6 +36,22 @@ class App extends Component {
       </div>
     );
   }
+  /**
+   * Делаем запрос всех статей с сервера
+   */
+  componentDidMount() {
+    this.props.callAllArticles();
+  }
 }
 
-export default App;
+export default withRouter(
+  connect(
+    state => {
+      return {
+        articles: filteredArticlesSelector(state),
+        loading: state.articles.isLoading
+      };
+    },
+    { callAllArticles }
+  )(App)
+);
