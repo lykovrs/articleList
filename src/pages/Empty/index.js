@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class EmptyPage extends Component {
   render() {
-    return <div>Empty page</div>;
+    return <h1>Empty page</h1>;
   }
 }
 
